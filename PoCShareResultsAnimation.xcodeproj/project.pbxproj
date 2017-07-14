@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB1F00031F18D9870063EE3A /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1F00021F18D9870063EE3A /* RoundedView.swift */; };
 		DB1FFFD51F18B9F20063EE3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1FFFD41F18B9F20063EE3A /* AppDelegate.swift */; };
 		DB1FFFD71F18B9F20063EE3A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1FFFD61F18B9F20063EE3A /* ViewController.swift */; };
 		DB1FFFDA1F18B9F20063EE3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB1FFFD81F18B9F20063EE3A /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB1F00021F18D9870063EE3A /* RoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		DB1FFFD11F18B9F20063EE3A /* PoCShareResultsAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PoCShareResultsAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB1FFFD41F18B9F20063EE3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB1FFFD61F18B9F20063EE3A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			children = (
 				DB1FFFD41F18B9F20063EE3A /* AppDelegate.swift */,
 				DB1FFFD61F18B9F20063EE3A /* ViewController.swift */,
+				DB1F00021F18D9870063EE3A /* RoundedView.swift */,
 				DB1FFFD81F18B9F20063EE3A /* Main.storyboard */,
 				DB1FFFDB1F18B9F20063EE3A /* Assets.xcassets */,
 				DB1FFFDD1F18B9F20063EE3A /* LaunchScreen.storyboard */,
@@ -264,6 +267,7 @@
 			files = (
 				DB1FFFD71F18B9F20063EE3A /* ViewController.swift in Sources */,
 				DB1FFFD51F18B9F20063EE3A /* AppDelegate.swift in Sources */,
+				DB1F00031F18D9870063EE3A /* RoundedView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

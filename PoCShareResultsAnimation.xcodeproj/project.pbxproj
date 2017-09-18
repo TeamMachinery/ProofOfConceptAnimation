@@ -15,6 +15,10 @@
 		DB1FFFDF1F18B9F20063EE3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB1FFFDD1F18B9F20063EE3A /* LaunchScreen.storyboard */; };
 		DB1FFFEA1F18B9F20063EE3A /* PoCShareResultsAnimationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1FFFE91F18B9F20063EE3A /* PoCShareResultsAnimationTests.swift */; };
 		DB1FFFF51F18B9F20063EE3A /* PoCShareResultsAnimationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1FFFF41F18B9F20063EE3A /* PoCShareResultsAnimationUITests.swift */; };
+		DB30D5161F6A7D510041B281 /* SchedulableAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30D5151F6A7D510041B281 /* SchedulableAnimation.swift */; };
+		DB30D5181F6A815E0041B281 /* SchedulableCAAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30D5171F6A815E0041B281 /* SchedulableCAAnimation.swift */; };
+		DB30D51A1F6A87D60041B281 /* SchedulableUIViewPropertyAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30D5191F6A87D60041B281 /* SchedulableUIViewPropertyAnimator.swift */; };
+		DB30D51C1F6A8B330041B281 /* SchedulableAnimationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30D51B1F6A8B330041B281 /* SchedulableAnimationFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,10 @@
 		DB1FFFF01F18B9F20063EE3A /* PoCShareResultsAnimationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PoCShareResultsAnimationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB1FFFF41F18B9F20063EE3A /* PoCShareResultsAnimationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoCShareResultsAnimationUITests.swift; sourceTree = "<group>"; };
 		DB1FFFF61F18B9F20063EE3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB30D5151F6A7D510041B281 /* SchedulableAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchedulableAnimation.swift; sourceTree = "<group>"; };
+		DB30D5171F6A815E0041B281 /* SchedulableCAAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchedulableCAAnimation.swift; sourceTree = "<group>"; };
+		DB30D5191F6A87D60041B281 /* SchedulableUIViewPropertyAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchedulableUIViewPropertyAnimator.swift; sourceTree = "<group>"; };
+		DB30D51B1F6A8B330041B281 /* SchedulableAnimationFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchedulableAnimationFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +109,10 @@
 			children = (
 				DB1FFFD41F18B9F20063EE3A /* AppDelegate.swift */,
 				DB1FFFD61F18B9F20063EE3A /* ViewController.swift */,
+				DB30D5151F6A7D510041B281 /* SchedulableAnimation.swift */,
+				DB30D5171F6A815E0041B281 /* SchedulableCAAnimation.swift */,
+				DB30D5191F6A87D60041B281 /* SchedulableUIViewPropertyAnimator.swift */,
+				DB30D51B1F6A8B330041B281 /* SchedulableAnimationFactory.swift */,
 				DB1F00021F18D9870063EE3A /* RoundedView.swift */,
 				DB1FFFD81F18B9F20063EE3A /* Main.storyboard */,
 				DB1FFFDB1F18B9F20063EE3A /* Assets.xcassets */,
@@ -266,7 +278,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB1FFFD71F18B9F20063EE3A /* ViewController.swift in Sources */,
+				DB30D51A1F6A87D60041B281 /* SchedulableUIViewPropertyAnimator.swift in Sources */,
+				DB30D5161F6A7D510041B281 /* SchedulableAnimation.swift in Sources */,
 				DB1FFFD51F18B9F20063EE3A /* AppDelegate.swift in Sources */,
+				DB30D5181F6A815E0041B281 /* SchedulableCAAnimation.swift in Sources */,
+				DB30D51C1F6A8B330041B281 /* SchedulableAnimationFactory.swift in Sources */,
 				DB1F00031F18D9870063EE3A /* RoundedView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -518,6 +534,7 @@
 				DB1FFFFB1F18B9F20063EE3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DB1FFFFC1F18B9F20063EE3A /* Build configuration list for PBXNativeTarget "PoCShareResultsAnimationTests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +543,7 @@
 				DB1FFFFE1F18B9F20063EE3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DB1FFFFF1F18B9F20063EE3A /* Build configuration list for PBXNativeTarget "PoCShareResultsAnimationUITests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +552,7 @@
 				DB1F00011F18B9F20063EE3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

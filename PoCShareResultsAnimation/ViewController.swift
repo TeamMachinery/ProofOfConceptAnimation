@@ -11,18 +11,18 @@ import QuartzCore
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var firstLineTop: NSLayoutConstraint!
+    @IBOutlet  var firstLineTop: NSLayoutConstraint!
     @IBOutlet weak var firstLineBottom: NSLayoutConstraint!
-    @IBOutlet weak var firstLineBottomUp: NSLayoutConstraint!
+    @IBOutlet  var firstLineBottomUp: NSLayoutConstraint!
     @IBOutlet weak var firstLineTopDown: NSLayoutConstraint!
     @IBOutlet weak var secondLineTop: NSLayoutConstraint!
-    @IBOutlet weak var secondLineBottom: NSLayoutConstraint!
-    @IBOutlet weak var secondLineTopDown: NSLayoutConstraint!
+    @IBOutlet  var secondLineBottom: NSLayoutConstraint!
+    @IBOutlet  var secondLineTopDown: NSLayoutConstraint!
     @IBOutlet weak var secondLineBottomUp: NSLayoutConstraint!
-    @IBOutlet weak var thirdLineTop: NSLayoutConstraint!
+    @IBOutlet  var thirdLineTop: NSLayoutConstraint!
     @IBOutlet weak var thirdLineBottom: NSLayoutConstraint!
     @IBOutlet weak var thirdLineTopDown: NSLayoutConstraint!
-    @IBOutlet weak var thirdLineBottomUp: NSLayoutConstraint!
+    @IBOutlet  var thirdLineBottomUp: NSLayoutConstraint!
 
     @IBOutlet weak var titleCenterX: NSLayoutConstraint!
     @IBOutlet weak var timeCenterX: NSLayoutConstraint!
@@ -35,7 +35,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var roundedViewWidth1: NSLayoutConstraint!
 
     @IBOutlet weak var containerViewTop: NSLayoutConstraint!
-    @IBOutlet weak var containerViewBottom: NSLayoutConstraint!
 
     @IBOutlet weak var containerView: UIView!
 
@@ -55,26 +54,42 @@ class ViewController: UIViewController {
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var swimLabel: UILabel!
 
+    let duration: TimeInterval = 1
+    let animationSegmentDurationPercentage = 0.2
+    var segmentDuration: TimeInterval { return animationSegmentDurationPercentage*duration }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        containerView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        containerView.layer.shadowColor = UIColor.black.cgColor
-        containerView.layer.shadowRadius = 15
-        containerView.layer.shadowOpacity = 0.0
-
-
+        finalViewSetup()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.animate()
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+
+        animate()
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    func finalViewSetup() {
+
+        containerView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowRadius = 15
+        containerView.layer.shadowOpacity = 0.0
+
+        imageView1.transform = CGAffineTransform(rotationAngle: -0.392)
+        imageView2.transform = CGAffineTransform(rotationAngle: -0.392)
+        imageView3.transform = CGAffineTransform(rotationAngle: -0.392)
+        view.layoutIfNeeded()
+
     }
 
 
@@ -84,161 +99,145 @@ class ViewController: UIViewController {
 // MARK: - Animation
 extension ViewController {
 
-
     func animate() {
+        let timeFractions = [0, 0.2, 0.4, 0.6, 0.8]
+        let times = timeFractions.map { $0*duration }
 
-        animateLines()
+        let animations = listOfAnimationsByPosition()
 
-
-        UIView.animate(withDuration: 0.2,
-                       delay: 0.25,
-                       options: .curveEaseIn,
-                       animations:
-        {
-            self.roundedView1.alpha = 1
-            self.roundedView2.alpha = 1
-            self.roundedView3.alpha = 1
-        }) { (success) in
-            let animation = self.animationCornerRadius(duration: 0.2)
-            self.roundedView1.layer.add(animation, forKey: nil)
-            self.roundedView1.layer.cornerRadius = 35
-            self.roundedView2.layer.add(animation, forKey: nil)
-            self.roundedView2.layer.cornerRadius = 35
-            self.roundedView3.layer.add(animation, forKey: nil)
-            self.roundedView3.layer.cornerRadius = 35
-            UIView.animate(withDuration: 0.2,
-                           delay: 0,
-                           options: .curveEaseIn,
-                           animations:
-                {
-                    self.roundedViewWidth1.constant = 70
-
-
-                    self.view.layoutIfNeeded()
-            }) { _ in
-                let animation = self.animationRotation(duration: 0.15)
-                self.imageView1.layer.add(animation, forKey: nil)
-                self.imageView1.layer.transform = CATransform3DMakeRotation(0, 0, 0, 1)
-                self.imageView2.layer.add(animation, forKey: nil)
-                self.imageView2.layer.transform = CATransform3DMakeRotation(0, 0, 0, 1)
-                self.imageView3.layer.add(animation, forKey: nil)
-                self.imageView3.layer.transform = CATransform3DMakeRotation(0, 0, 0, 1)
-                UIView.animate(withDuration: 0.15,
-                               delay: 0,
-                               options: .curveLinear,
-                               animations:
-                    {
-                        self.imageView1.alpha = 1
-                        self.imageView2.alpha = 1
-                        self.imageView3.alpha = 1
-
-                }) { _ in
-                    let animation = self.animationShadowOpacity(duration: 0.3)
-                    self.containerView.layer.add(animation, forKey: nil)
-                    self.containerView.layer.shadowOpacity = 0.5
-                    UIView.animate(withDuration: 0.3,
-                                   delay: 0,
-                                   options: .curveEaseIn,
-                                   animations:
-                    {
-
-                        self.titleLabel.alpha = 1
-                        self.titleCenterX.constant = 0
-
-                        self.timeLabel.alpha = 1
-                        self.timeCenterX.constant = 0
-
-                        self.runLabel.alpha = 1
-                        self.runCenterX.constant = 0
-
-                        self.weightLabel.alpha = 1
-                        self.weightDistanceY.constant = 20
-
-                        self.swimLabel.alpha = 1
-                        self.swimCenterX.constant = 0
-
-                        self.shareResultsButton.alpha = 1
-                        self.buttonDistanceY.constant = 100
-
-                        self.view.backgroundColor = #colorLiteral(red: 0.9244058728, green: 0.9244058728, blue: 0.9244058728, alpha: 1)
-
-
-                        self.view.layoutIfNeeded()
-                    })
-                }
-            }
-
+        for aniPos in animations {
+            aniPos.0.start(at: times[aniPos.1])
         }
-
-
-
-    }
-
-    func animateLines() {
-        UIView.animate(withDuration: 0.3,
-                       delay: 0,
-                       options: .curveEaseIn,
-                       animations:
-            {
-                self.firstLineBottomUp.isActive = false
-                self.thirdLineBottomUp.isActive = false
-                self.secondLineTopDown.isActive = false
-                self.view.layoutIfNeeded()
-
-        })
-
-        UIView.animate(withDuration: 0.3,
-                       delay: 0.25,
-                       options: .curveEaseIn,
-                       animations:
-            {
-                self.firstLineTop.isActive = false
-                self.thirdLineTop.isActive = false
-                self.secondLineBottom.isActive = false
-                self.view.layoutIfNeeded()
-                
-        })
     }
 
     func animateEverythingOut() {
 
-        UIView.animate(withDuration: 0.2,
+        UIView.animate(withDuration: 0.4,
                        delay: 0,
                        options: .curveEaseIn,
                        animations:
         {
-            self.containerViewBottom.constant = self.containerViewBottom.constant + 700
-            self.containerViewTop.constant = self.containerViewTop.constant - 700
+            self.containerViewTop.constant = self.containerViewTop.constant - 500
 
             self.buttonDistanceY.constant = -60
             self.view.layoutIfNeeded()
         })
 
+        perform(#selector(reset), with: nil, afterDelay: 0.5)
+
     }
 
-    func animationCornerRadius(duration: Double) -> CABasicAnimation {
-        let animation = CABasicAnimation(keyPath: "cornerRadius")
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        animation.fromValue = 8
-        animation.toValue = 35
-        animation.duration = duration
-        return animation
+    func reset() {
+
+        firstLineBottomUp.isActive = true
+        thirdLineBottomUp.isActive = true
+        secondLineTopDown.isActive = true
+        firstLineTop.isActive = true
+        thirdLineTop.isActive = true
+        secondLineBottom.isActive = true
+        roundedView1.alpha = 0
+        roundedView2.alpha = 0
+        roundedView3.alpha = 0
+        roundedView1.layer.cornerRadius = 8
+        roundedView2.layer.cornerRadius = 8
+        roundedView3.layer.cornerRadius = 8
+        roundedView1.layer.removeAllAnimations()
+        roundedView2.layer.removeAllAnimations()
+        roundedView3.layer.removeAllAnimations()
+        roundedViewWidth1.constant = 16
+        imageView1.transform = CGAffineTransform(rotationAngle: -0.392)
+        imageView2.transform = CGAffineTransform(rotationAngle: -0.392)
+        imageView3.transform = CGAffineTransform(rotationAngle: -0.392)
+        imageView1.alpha = 0
+        imageView2.alpha = 0
+        imageView3.alpha = 0
+        containerView.layer.shadowOpacity = 0
+        containerView.layer.removeAllAnimations()
+        titleLabel.alpha = 0
+        timeLabel.alpha = 0
+        runLabel.alpha = 0
+        weightLabel.alpha = 0
+        swimLabel.alpha = 0
+        shareResultsButton.alpha = 0
+        titleCenterX.constant = -20
+        timeCenterX.constant = 20
+        runCenterX.constant = -20
+        swimCenterX.constant = 20
+        weightDistanceY.constant = 40
+
+        buttonDistanceY.constant = -60
+        self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 2, animations: { 
+            self.view.backgroundColor = UIColor.white
+            self.view.layoutIfNeeded()
+        }) { (success) in
+            self.containerViewTop.constant = 75
+            self.view.layoutIfNeeded()
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+        }
+
     }
 
-    func animationRotation(duration: Double) -> CABasicAnimation {
-        let animation = CABasicAnimation(keyPath: "transform.rotation")
-        animation.fromValue = -0.392
-        animation.toValue = 0
-        animation.duration = duration
-        return animation
-    }
+    func listOfAnimationsByPosition() -> [(SchedulableAnimation, Int)] {
+        let lineStarts = [firstLineBottomUp!, thirdLineBottomUp!, secondLineTopDown!]
+        let lineStartAnimation = SchedulableAnimationFactory
+            .lineConstraintAnimation(view: self.view,
+                                     constraints: lineStarts,
+                                     duration: segmentDuration)
 
-    func animationShadowOpacity(duration: Double) -> CABasicAnimation {
-        let animation = CABasicAnimation(keyPath: "shadowOpacity")
-        animation.fromValue = 0
-        animation.toValue = 0.5
-        animation.duration = duration
-        return animation
+
+        let lineEnds = [firstLineTop!, thirdLineTop!, secondLineBottom!]
+        let lineEndAnimation = SchedulableAnimationFactory.lineConstraintAnimation(view: self.view,
+                                                                                   constraints: lineEnds,
+                                                                                   duration: segmentDuration)
+
+
+        let roundedViews = [roundedView1!, roundedView2!, roundedView3!]
+        let roundViewAlphaAnimation = SchedulableAnimationFactory.roundAlphaAnimation(roundViews: roundedViews,
+                                                                                      duration: segmentDuration)
+
+
+
+        let roundViewCornerAnimation = SchedulableAnimationFactory.roundCornerAnimation(views: roundedViews,
+                                                                                    duration: segmentDuration)
+
+
+        let roundViewScaleAnimation = SchedulableAnimationFactory.roundViewScaleAnimation(view: self.view,
+                                                                                          scaleConstraint: roundedViewWidth1,
+                                                                                          duration: segmentDuration)
+
+
+        let imageViews = [imageView1!, imageView2!, imageView3!]
+        let imageRotateAnimation = SchedulableAnimationFactory.imageRotationAnimation(views: imageViews,
+                                                                                      duration: segmentDuration)
+
+
+        let imageAlphaAnimation = SchedulableAnimationFactory.imageAlphaAnimation(views: imageViews,
+                                                                                  duration: segmentDuration)
+
+        let shadowOpacityAnimation = SchedulableAnimationFactory.shadowOpacityAnimation(view: containerView,
+                                                                                        duration: segmentDuration)
+
+
+
+        let alphaViews: [UIView] = [titleLabel!, timeLabel!, runLabel!, weightLabel!, swimLabel!, shareResultsButton!]
+        let centerConstraints = [titleCenterX!, timeCenterX!, runCenterX!, swimCenterX!]
+        let labelAnimations = SchedulableAnimationFactory.labelAnimations(mainView: view,
+                                                                          alphaViews: alphaViews,
+                                                                          centerConstraints: centerConstraints,
+                                                                          weightDistance: weightDistanceY,
+                                                                          buttonDistance: buttonDistanceY,
+                                                                          duration: segmentDuration)
+
+        return [(lineStartAnimation, 0),
+                (lineEndAnimation, 1),
+                (roundViewAlphaAnimation, 1),
+                (roundViewScaleAnimation, 2),
+                (roundViewCornerAnimation, 2),
+                (imageRotateAnimation, 3),
+                (imageAlphaAnimation, 3),
+                (shadowOpacityAnimation, 4),
+                (labelAnimations, 4)]
     }
 
 
@@ -248,7 +247,17 @@ extension ViewController {
 extension ViewController {
 
     @IBAction func sharePressed(button: UIButton) {
+        let timingFunction =
+            CAMediaTimingFunction(controlPoints: 1,-0.37,0.62,1)
+        CATransaction.begin()
+        CATransaction.setAnimationTimingFunction(timingFunction)
         animateEverythingOut()
+        CATransaction.commit()
+    }
+
+    @IBAction func animatePressed(button: UIBarButtonItem) {
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        animate()
     }
 
 }
